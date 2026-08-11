@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+from typing import Protocol
+
 class Distance:
     """
     Represents a distance with a value and unit.
@@ -35,11 +38,80 @@ class Distance:
             self._magnitude * self.MI_TO_KM,
             "km"
         )
+    def __add__(self, other):
+        if not isinstance(other, Distance):
+            return NotImplemented
+
+        if self.unit == other.unit:
+            other_magnitude = other.magnitude
+        else:
+            other_magnitude = other.convert().magnitude
+
+        return Distance(
+            self.magnitude + other_magnitude,
+            self.unit
+        )
+
+    def __sub__(self, other):
+        if not isinstance(other, Distance):
+            return NotImplemented
+
+        if self.unit == other.unit:
+            other_magnitude = other.magnitude
+        else:
+            other_magnitude = other.convert().magnitude
+
+        result = self.magnitude - other_magnitude
+
+        if result < 0:
+            raise ValueError(
+                "Distance subtraction cannot result in a negative value."
+            )
+
+        return Distance(result, self.unit)
+
+    def __eq__(self, other):
+        if not isinstance(other, Distance):
+            return False
+
+        if self.unit == other.unit:
+            other_magnitude = other.magnitude
+        else:
+            other_magnitude = other.convert().magnitude
+
+        return abs(
+            self.magnitude - other_magnitude
+        ) < 0.0001
+
+    def __lt__(self, other):
+        if not isinstance(other, Distance):
+            return NotImplemented
+
+        if self.unit == other.unit:
+            other_magnitude = other.magnitude
+        else:
+            other_magnitude = other.convert().magnitude
+
+        return self.magnitude < other_magnitude
+
+    def __gt__(self, other):
+        if not isinstance(other, Distance):
+            return NotImplemented
+
+        if self.unit == other.unit:
+            other_magnitude = other.magnitude
+        else:
+            other_magnitude = other.convert().magnitude
+
+        return self.magnitude > other_magnitude
+
+    def __repr__(self):
+        return f"Distance({self.magnitude}, '{self.unit}')"
 
     def __str__(self):
         return f"{self._magnitude:.2f} {self._unit}"
 
-class Trail:
+class Trail(ABC):
     """
     Represents a hiking trail.
     """
@@ -141,6 +213,16 @@ class Trail:
             return False
 
         return self.id == other.id
+    @abstractmethod
+    def estimated_time(self):
+        pass
+
+    def packing_list(self):
+        return [
+            "Water",
+            "Map",
+            "First aid kit"
+        ]
 
     def __str__(self):
         return (
@@ -177,3 +259,151 @@ class Itinerary:
                 total_km += trail.distance.convert().magnitude
 
         return Distance(total_km, "km")
+
+class HasSummary(Protocol):
+    def summary(self) -> str:
+        ...
+
+
+class HasName(Protocol):
+    name: str
+
+
+class PrintableMixin:
+    """
+    Mixin that prints a trail summary.
+    """
+
+    def print_summary(self: HasSummary):
+        print(self.summary())
+
+class ShareableMixin:
+    """
+    Mixin that shares a trail.
+    """
+
+    def share(self: HasName):
+        return f"Sharing '{self.name}' with friends!"
+
+
+class DayHike(PrintableMixin, Trail):
+    """
+    Represents a day hike.
+    """
+
+    def estimated_time(self):
+        return self.distance.magnitude / 4
+
+    def summary(self):
+        return f"Day Hike: {self.name}"
+
+class GuidedDayHike(DayHike):
+    """
+    Represents a guided day hike.
+    """
+
+    def __init__(
+            self,
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty,
+            guide_name
+    ):
+        super().__init__(
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty
+        )
+
+        self.guide_name = guide_name
+
+    def summary(self):
+        return (
+            super().summary()
+            + f" | Guide: {self.guide_name}"
+        )
+
+class BackpackingRoute(PrintableMixin, ShareableMixin, Trail):
+    """
+    Represents a multi-day backpacking route.
+    """
+
+    def __init__(
+            self,
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty
+    ):
+        super().__init__(
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty
+        )
+
+    def estimated_time(self):
+        return self.distance.magnitude / 3
+
+    def summary(self):
+        return f"Backpacking Route: {self.name}"
+
+    def packing_list(self):
+        items = super().packing_list()
+        items.extend([
+            "Tent",
+            "Sleeping bag",
+            "Food"
+        ])
+        return items
+
+class TrailRun(ShareableMixin, Trail):
+    """
+    Represents a trail running route.
+    """
+
+    def __init__(
+            self,
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty
+    ):
+        super().__init__(
+            trail_id,
+            name,
+            distance,
+            elevation_gain_m,
+            difficulty
+        )
+
+    def estimated_time(self):
+        return self.distance.magnitude / 8
+
+    def summary(self):
+        return f"Trail Run: {self.name}"
+
+
+class FakeTrail:
+    """
+    Duck-typed trail used to demonstrate polymorphism.
+    This class does not inherit from Trail.
+    """
+
+    def __init__(self, name, hours=1.5):
+        self.name = name
+        self.hours = hours
+
+    def estimated_time(self):
+        return self.hours
+
+    def summary(self):
+        return f"Fake Trail: {self.name}"
+
