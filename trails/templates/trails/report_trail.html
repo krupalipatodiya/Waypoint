@@ -1,7 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Report Trail</title>
+    <meta charset="UTF-8">
+    <title>Report a Trail</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
@@ -10,18 +14,19 @@
 <form method="post">
     {% csrf_token %}
 
-    <label>Trail Name:</label><br>
-    <input type="text" name="trail_name"><br><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
 
-    <label>Difficulty:</label><br>
-    <select name="difficulty">
-        <option>Easy</option>
-        <option>Moderate</option>
-        <option>Hard</option>
-    </select><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
 
-    <button type="submit">Submit</button>
+    <label for="trail">Trail:</label>
+    <input type="text" id="trail" name="trail" required>
 
+    <label for="note">Note:</label>
+    <textarea id="note" name="note" rows="5"></textarea>
+
+    <button type="submit">Submit Report</button>
 </form>
 
 </body>
