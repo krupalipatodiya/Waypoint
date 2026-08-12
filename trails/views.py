@@ -7,12 +7,16 @@ def home(request):
 
 def report_trail(request):
     if request.method == "POST":
-        trail_name = request.POST.get("trail_name")
-        difficulty = request.POST.get("difficulty")
+        name = request.POST.get("name", "")
+        email = request.POST.get("email", "")
+        trail = request.POST.get("trail", "")
+        note = request.POST.get("note", "")
 
         context = {
-            "trail_name": trail_name,
-            "difficulty": difficulty,
+            "name": name,
+            "email": email,
+            "trail": trail,
+            "note": note,
         }
 
         return render(request, "trails/thank_you.html", context)

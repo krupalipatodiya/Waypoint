@@ -1,17 +1,23 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Thank You</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
-<h1>Trail Submitted!</h1>
+<h1>Thank you, {{ name }}!</h1>
 
-<p><strong>Trail Name:</strong> {{ trail_name }}</p>
+<p>Your trail report has been submitted successfully.</p>
 
-<p><strong>Difficulty:</strong> {{ difficulty }}</p>
+<p><strong>Trail:</strong> {{ trail }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+<p><strong>Note:</strong> {{ note }}</p>
 
-<a href="/report/">Submit another trail</a>
+<a href="/report/">Submit another report</a>
 
 </body>
 </html>
