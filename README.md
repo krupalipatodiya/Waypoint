@@ -39,3 +39,14 @@ The program will execute all Week 7 tests.
 - Method overriding using super()
 - Method Resolution Order demonstration
 - FakeTrail duck typing examples
+
+## Week 9 Features
+
+- Installed Django 4.2
+- Created virtual environment
+- Created Django project
+- Generated manage.py
+- Generated requirements.txt
+- Verified Django installation
+- Ran development server successfully
+- Verified default Django welcome page
