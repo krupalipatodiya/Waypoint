@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Trail</title>
+</head>
+<body>
+
+<h1>Report a Trail</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Trail Name:</label><br>
+    <input type="text" name="trail_name"><br><br>
+
+    <label>Difficulty:</label><br>
+    <select name="difficulty">
+        <option>Easy</option>
+        <option>Moderate</option>
+        <option>Hard</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
