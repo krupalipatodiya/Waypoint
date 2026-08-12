@@ -3,5 +3,5 @@ env/
 __pycache__/
 *.pyc
 .idea/
-db.sqlite3s
+db.sqlite3
 
