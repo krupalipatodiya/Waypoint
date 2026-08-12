@@ -50,3 +50,14 @@ The program will execute all Week 7 tests.
 - Verified Django installation
 - Ran development server successfully
 - Verified default Django welcome page
+
+## Week 10 Features
+
+- Configured global templates and static directories in Django settings.
+- Added a styled homepage using a context variable and external CSS.
+- Created a Trail Report form using GET and POST requests.
+- Implemented CSRF protection for secure form submission.
+- Added a personalized Thank You page after submitting the form.
+- Implemented a search page using `request.GET.get("q", "")`.
+- Registered all application routes in `urls.py`.
+- Verified static files load correctly using Django `{% static %}`.
