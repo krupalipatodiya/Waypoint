@@ -1,4 +1,4 @@
-from waypoint_core.domain import Distance, Trail, Itinerary
+from waypoint_core.domain import Distance, Trail, DayHike, Itinerary
 
 print("=" * 60)
 print("WAYPOINT - WEEK 7 TEST")
@@ -28,7 +28,7 @@ trail_data = {
     "difficulty": "moderate"
 }
 
-trail1 = Trail.from_dict(trail_data)
+trail1 = DayHike.from_dict(trail_data)
 
 print(trail1)
 
@@ -37,7 +37,7 @@ print(trail1)
 # -----------------------------
 print("\nTest 3 - Equality")
 
-trail2 = Trail(
+trail2 = DayHike(
     101,
     "Another Trail",
     Distance(15, "km"),
@@ -52,7 +52,7 @@ print("Same ID:", trail1 == trail2)
 # -----------------------------
 print("\nTest 4 - Itinerary")
 
-trail3 = Trail(
+trail3 = DayHike(
     102,
     "Forest Trail",
     Distance(3, "km"),
@@ -60,7 +60,7 @@ trail3 = Trail(
     "easy"
 )
 
-trail4 = Trail(
+trail4 = DayHike(
     103,
     "Mountain Trail",
     Distance(4, "km"),
@@ -87,7 +87,7 @@ except ValueError as e:
     print("Negative distance rejected:", e)
 
 try:
-    Trail(
+    DayHike(
         104,
         "Bad Trail",
         Distance(5, "km"),
@@ -98,11 +98,15 @@ except ValueError as e:
     print("Invalid difficulty rejected:", e)
 
 print("\nAll Week 7 tests completed successfully.")
+
+# -----------------------------
+# Test 6 - Default Unit
+# -----------------------------
 print("\nTest 6 - Default Unit")
 
 Trail.set_default_unit("mi")
 
-new_trail = Trail.from_dict({
+new_trail = DayHike.from_dict({
     "id": 200,
     "name": "Lake Trail",
     "distance": 8,
@@ -112,6 +116,10 @@ new_trail = Trail.from_dict({
 
 print("New Trail Unit:", new_trail.distance.unit)
 print("Original Trail Unit:", trail1.distance.unit)
+
+# -----------------------------
+# Test 7 - Independent Itineraries
+# -----------------------------
 print("\nTest 7 - Independent Itineraries")
 
 trip2 = Itinerary()
