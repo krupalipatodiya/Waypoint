@@ -20,11 +20,8 @@ Trail Catalog
     {% for trail in trails %}
         <tr>
             <td>{{ forloop.counter }}</td>
-
             <td>{{ trail.name }}</td>
-
             <td>{{ trail.distance|floatformat:1 }} km</td>
-
             <td>{{ trail.elevation }} m</td>
 
             <td>
