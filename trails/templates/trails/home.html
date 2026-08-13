@@ -1,17 +1,13 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Waypoint</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title %}
+Home
+{% endblock %}
 
-    <h1>Welcome to Waypoint</h1>
+{% block content %}
 
-    <p>Your trail finder and trip planner.</p>
+<h1>Welcome to Waypoint</h1>
 
-</body>
-</html>
+<p>Your trail finder and trip planner.</p>
+
+{% endblock %}

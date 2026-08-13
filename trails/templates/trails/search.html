@@ -1,37 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Trails</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+Search Trails
+{% endblock %}
+
+{% block content %}
 
 <h1>Search Trails</h1>
 
 <form method="get">
-    <label for="search">Trail Name:</label>
-    <input
-        type="text"
-        id="search"
-        name="q"
-        value="{{ query }}"
-    >
+    <label for="q">Trail Name:</label>
+    <input type="text" id="q" name="q" value="{{ query }}">
     <button type="submit">Search</button>
 </form>
 
-{% if query %}
+{% if results %}
     <h2>Search Results</h2>
 
-    {% if results %}
-        <ul>
-            {% for trail in results %}
-                <li>{{ trail }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No trails found.</p>
-    {% endif %}
+    <ul>
+        {% for trail in results %}
+            <li>{{ trail }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
 
-</body>
-</html>
+{% endblock %}
