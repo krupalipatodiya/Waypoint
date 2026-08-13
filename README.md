@@ -51,6 +51,7 @@ The program will execute all Week 7 tests.
 - Ran development server successfully
 - Verified default Django welcome page
 
+
 ## Week 10 Features
 
 - Configured global templates and static directories in Django settings.
@@ -61,3 +62,16 @@ The program will execute all Week 7 tests.
 - Implemented a search page using `request.GET.get("q", "")`.
 - Registered all application routes in `urls.py`.
 - Verified static files load correctly using Django `{% static %}`.
+
+
+## Week 11 Features
+
+- Created reusable base.html
+- Added shared navbar and footer
+- Converted all pages to template inheritance
+- Created Trail Catalog page
+- Displayed 6 trail objects
+- Used Django for loop
+- Used forloop.counter
+- Used if/elif/else badges
+- Used floatformat filter

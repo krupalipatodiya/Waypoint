@@ -1,13 +1,10 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Report a Trail</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% block title %}
+Report a Trail
+{% endblock %}
+
+{% block content %}
 
 <h1>Report a Trail</h1>
 
@@ -29,5 +26,4 @@
     <button type="submit">Submit Report</button>
 </form>
 
-</body>
-</html>
+{% endblock %}
