@@ -75,3 +75,16 @@ The program will execute all Week 7 tests.
 - Used forloop.counter
 - Used if/elif/else badges
 - Used floatformat filter
+
+
+## Week 12 Features
+
+- Added Trail Django model
+- Added database migration
+- Registered Trail in Django Admin
+- Added list_display and search_fields
+- Replaced hardcoded catalog data with database records
+- Filtered catalog to show only open trails
+- Ordered trails by distance
+- Mounted trails app under /trails/
+- Added automated Django tests
