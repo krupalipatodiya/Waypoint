@@ -6,12 +6,31 @@ Trail Catalog
 
 {% block content %}
 
+<form method="get">
+    <label for="park">Filter by Park:</label>
+
+    <select name="park" id="park">
+        <option value="">All Parks</option>
+
+        {% for park in parks %}
+            <option value="{{ park.id }}">
+                {{ park.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+<br>
+
 <h1>Trail Catalog</h1>
 
 <table border="1" cellpadding="8">
     <tr>
         <th>#</th>
         <th>Trail</th>
+        <th>Park</th>
         <th>Distance</th>
         <th>Elevation</th>
         <th>Status / Difficulty</th>
@@ -21,6 +40,15 @@ Trail Catalog
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ trail.name }}</td>
+
+            <td>
+                {% if trail.park %}
+                    {{ trail.park.name }}
+                {% else %}
+                    Unassigned
+                {% endif %}
+            </td>
+
             <td>{{ trail.distance|floatformat:1 }} km</td>
             <td>{{ trail.elevation }} m</td>
 
@@ -37,4 +65,4 @@ Trail Catalog
     {% endfor %}
 </table>
 
-{% endblock %}
+{% endblock %}s

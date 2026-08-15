@@ -1,4 +1,4 @@
-from .models import Trail
+from .models import Trail, Park
 from django.shortcuts import render
 
 
@@ -50,11 +50,24 @@ def search_trails(request):
     return render(request, "trails/search.html", context)
 
 def catalog(request):
-    trails = Trail.objects.filter(is_open=True).order_by("distance_km")
+    trails = Trail.objects.filter(
+        is_open=True
+    ).order_by("distance_km")
+
+    park_id = request.GET.get("park")
+
+    if park_id:
+        trails = trails.filter(park_id=park_id)
+
+    parks = Park.objects.all().order_by("name")
 
     return render(
         request,
         "trails/catalog.html",
-        {"trails": trails},
+        {
+            "trails": trails,
+            "parks": parks,
+            "selected_park": park_id,
+        },
     )
 

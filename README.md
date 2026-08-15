@@ -88,3 +88,16 @@ The program will execute all Week 7 tests.
 - Ordered trails by distance
 - Mounted trails app under /trails/
 - Added automated Django tests
+
+
+## Week 13 Features
+
+- Added Park model with name and region
+- Added a ForeignKey from Trail to Park
+- Used SET_NULL so deleting a park does not delete its trails
+- Allowed existing trails to temporarily have no park assigned
+- Created and applied the Week 13 migration
+- Registered Park in Django Admin
+- Added park assignment to Trail admin
+- Displayed each trail's park in the catalog
+- Added catalog filtering by park
