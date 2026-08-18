@@ -101,3 +101,22 @@ The program will execute all Week 7 tests.
 - Added park assignment to Trail admin
 - Displayed each trail's park in the catalog
 - Added catalog filtering by park
+
+
+## Week 14 - Hardening and Handoff
+
+Week 14 focused on testing, documentation, and preparing the Waypoint project for final handoff.
+
+### Testing
+
+The project includes automated tests for:
+
+- Displaying only open trails in the catalog
+- Returning a 404 response when a trail does not exist
+- Rejecting negative distance values
+- Existing Trail model and catalog functionality
+
+Run all tests with:
+
+```bash
+python manage.py test

@@ -6,4 +6,5 @@ urlpatterns = [
     path("report/", views.report_trail, name="report"),
     path("search/", views.search_trails, name="search"),
     path("catalog/", views.catalog, name="catalog"),
+    path("<int:pk>/", views.trail_detail, name="trail_detail"),
 ]

@@ -1,5 +1,5 @@
 from .models import Trail, Park
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 def home(request):
@@ -70,4 +70,14 @@ def catalog(request):
             "selected_park": park_id,
         },
     )
+def trail_detail(request, pk):
+    trail = get_object_or_404(Trail, pk=pk)
+
+    return render(
+        request,
+        "trails/detail.html",
+        {"trail": trail},
+    )
+
+
 
